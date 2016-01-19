@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.boot.bfinal.repository.ValveFitDao">
+
+    <!--
+       =========================================
+       support for sql write operate dependence
+       =========================================
+    -->
+
+    <!-- insert object  -->
+    <insert id="insert" parameterType="valveFit" flushCache="true">
+        <selectKey resultType="java.lang.Long" keyProperty="object.id" order="AFTER">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+        INSERT INTO
+          valve_fit(<include refid="columnsWithOutPK"/>)
+        VALUES
+        (#{object.valveValue}, #{object.valveType}, #{object.depict}, #{object.valveTitle})
+    </insert>
+
+    <!-- delete object by primary key-->
+    <delete id="delete" parameterType="java.lang.Long" flushCache="true">
+        DELETE FROM
+          valve_fit
+        WHERE
+          id=#{pKey}
+    </delete>
+
+    <!-- delete object by primary keys-->
+    <delete id="deleteMulti" flushCache="true">
+        DELETE FROM
+          valve_fit
+        WHERE
+          id
+        IN
+        <foreach item="item" index="index" collection="pKeys" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <!-- delete object with condition-->
+    <delete id="deleteObjects" parameterType="valveFit" flushCache="true">
+        DELETE FROM
+          valve_fit
+        WHERE
+        1=1
+        <include refid="selectCondition" />
+    </delete>
+
+    <!-- update object by primary key-->
+    <update id="update" parameterType="valveFit" flushCache="true">
+        UPDATE
+          valve_fit  <include refid="updateCondition" />
+        WHERE
+          id=#{object.id}
+    </update>
+
+
+    <!--
+        =========================================
+        support for sql read operate dependence
+        =========================================
+     -->
+
+
+    <!-- select object by primaryKey  -->
+    <select id="select" parameterType="java.lang.Long" resultType="valveFit" useCache="true">
+        SELECT
+        <include refid="wholeColumnsToProperties" />
+        FROM
+          valve_fit
+        WHERE
+          id=#{pKey}
+    </select>
+
+
+    <!-- select object by primaryKeys  -->
+    <select id="selectMulti" resultType="valveFit" useCache="true">
+        SELECT
+        <include refid="wholeColumnsToProperties" />
+        FROM
+          valve_fit
+        WHERE
+          id
+        IN
+        <foreach item="item" index="index" collection="pKeys" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <!-- select object by condition for page -->
+    <select id="selectPagination" resultType="valveFit" useCache="true">
+        SELECT
+        <include refid="wholeColumnsToProperties" />
+        FROM
+          valve_fit
+        WHERE
+        1 = 1
+        <include refid="selectCondition" />
+        LIMIT #{offset},#{size}
+    </select>
+
+    <!-- select object with condition for page row total -->
+    <select id="selectTotal" parameterType="valveFit" resultType="java.lang.Integer" useCache="true">
+        SELECT
+        count(0)
+        FROM
+        valve_fit
+        WHERE
+        1 = 1
+        <include refid="selectCondition" />
+    </select>
+
+    <!-- select object with condition -->
+    <select id="selectObjects" parameterType="valveFit" resultType="valveFit"  useCache="true">
+        SELECT
+        <include refid="wholeColumnsToProperties" />
+        FROM
+        valve_fit
+        WHERE
+        1 = 1
+        <include refid="selectCondition" />
+    </select>
+
+
+    <!--
+        =========================================
+        support for sql construct dependence
+        =========================================
+    -->
+
+
+    <!--  table columns without primary key -->
+    <sql id="columnsWithOutPK">
+         valveValue, valveType, depict, valveTitle
+    </sql>
+
+    <!--  whole table column -->
+    <sql id="wholeColumns">
+        id, <include refid="columnsWithOutPK" />
+    </sql>
+
+    <!-- whole table column with object properties mapping -->
+    <sql id="wholeColumnsToProperties">
+         id AS id,
+                valveValue AS valveValue ,
+                valveType AS valveType ,
+                depict AS depict ,
+                valveTitle AS valveTitle 
+            </sql>
+
+    <!-- select condition -->
+    <sql id="selectCondition">
+        <if test="object.valveValue!= null and ''!=object.valveValue">
+            <![CDATA[ AND valveValue = #{object.valveValue}]]>
+        </if>
+        <if test="object.valveType!= null and ''!=object.valveType">
+            <![CDATA[ AND valveType = #{object.valveType}]]>
+        </if>
+        <if test="object.depict!= null and ''!=object.depict">
+            <![CDATA[ AND depict = #{object.depict}]]>
+        </if>
+        <if test="object.valveTitle!= null and ''!=object.valveTitle">
+            <![CDATA[ AND valveTitle = #{object.valveTitle}]]>
+        </if>
+
+    </sql>
+
+    <!-- update condition -->
+    <sql id="updateCondition">
+        <set>
+          <if test="object.valveValue!= null and ''!=object.valveValue">
+            <![CDATA[ valveValue = #{object.valveValue}, ]]>
+          </if>
+          <if test="object.valveType!= null and ''!=object.valveType">
+            <![CDATA[ valveType = #{object.valveType}, ]]>
+          </if>
+          <if test="object.depict!= null and ''!=object.depict">
+            <![CDATA[ depict = #{object.depict}, ]]>
+          </if>
+          <if test="object.valveTitle!= null and ''!=object.valveTitle">
+                <![CDATA[ valveTitle = #{object.valveTitle} ]]>
+          </if>
+
+        </set>
+    </sql>
+
+</mapper>

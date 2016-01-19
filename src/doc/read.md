@@ -1,0 +1,2 @@
+[start]
+spring-boot:run

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <logger name="com.spring.boot.final" level="DEBUG"/>
+    <logger name="net.sf.ehcache" level="DEBUG"/>
+    <logger name="org.apache.ibatis" level="DEBUG" />
+    <logger name="java.sql" level="debug" />
+    <logger name="org.springframework.web" level="INFO"/>
+</configuration>

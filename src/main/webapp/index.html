@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <!-- ================== BEGIN BASE JS ================== -->
+    <script src="/assets/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <script src="/assets/plugins/jquery/jquery-migrate-1.1.0.min.js"></script>
+    <script src="/assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js"></script>
+    <script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!--[if lt IE 9]>
+    <script src="/assets/crossbrowserjs/html5shiv.js"></script>
+    <script src="/assets/crossbrowserjs/respond.min.js"></script>
+    <script src="/assets/crossbrowserjs/excanvas.min.js"></script>
+    <![endif]-->
+    <script src="/assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="/assets/plugins/jquery-cookie/jquery.cookie.js"></script>
+    <script src="/assets/plugins/echarts/esl/esl.js"></script>
+    <script src="/assets/plugins/echarts/echarts-all.js"></script>
+    <script src="/assets/plugins/juicer/juicer-min.js"></script>
+    <script src="/assets/modules/template/Tpl.js"></script>
+</head>
+<body>
+
+<div id="demo"></div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>盘符</th>
+            <th>类型</th>
+            <th>总大小</th>
+            <th>已使用</th>
+            <th>剩余</th>
+            <th>使用率</th>
+        </tr>
+        </thead>
+        <tbody>
+            <div id="demo1"></div>
+        </tbody>
+    </table>
+
+<script type="text/javascript">
+    /*$(function(){
+        $.ajax({
+            type : "POST",
+            url : '/monitor/diskInfo',
+            async : false,
+            dataType: 'json',
+            //jsonp: 'callback',
+            success : function(json) {
+                alert(monitor_sidkInfo_Tpl);
+                $("#demo1").html(juicer(monitor_sidkInfo_Tpl,json));
+            }
+        });
+    });*/
+</script>
+
+
+</body>
+</html>
